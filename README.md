@@ -8,6 +8,7 @@ Requirements
 ------------
 
 Following commands shall be available to perform backup properly:
+
  * `gzip` -- currently only gz archives a supported.
  * `tar` -- for files archiving.
  * `mysqlbackup` -- if you need to backup MySQL database.
