@@ -199,7 +199,7 @@ then
 fi 
 
 # Cleanup remote backup dir
-if [[ -n $ftp_life_time && $2 = "base" ]]
+if [[ -n $ftp_host && -n $ftp_life_time && $2 = "base" ]]
 then
 	echo -n "Removing outdated files from FTP..."
 	echo "quote USER $ftp_user
