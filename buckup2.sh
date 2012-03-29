@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Buckup version 0.3.1
-# Copyright (C) 2012 Mike Limansky
+# Copyright (C) 2009-2012 Mike Limansky
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -63,6 +63,9 @@ then
 	errorlog "Configuration file not found."
 	exit 2
 fi
+
+#Default values
+mysql_host="localhost"
 
 source $1
 
@@ -146,7 +149,8 @@ if [[ -n $mysql_databases ]]
 then
 	echo -n "Creating DB dump..."
 	dumpname="$archive_path/$archive_name-$today.$DUMP_EXT"
-	if mysqldump -u$mysql_user -p$mysql_passwd --databases $mysql_databases > $dumpname
+
+	if mysqldump -u$mysql_user -p$mysql_passwd -h$mysql_host --databases $mysql_databases > $dumpname
 	then
 		echo " Done"
 		echo -n "Gzipping the dump..."

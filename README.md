@@ -42,9 +42,11 @@ Config file format
 
 ### Database backup options:
 
- * `mysql_databases` -- list of databases to be included in backup.
+ * `mysql_databases` -- list of databases to be included in backup. If not defined, DB backup is 
+                        not performed.
  * `mysql_user` -- user name to connect to DB (this user shall have read access to the DB).
  * `mysql_passwd` -- user password to connect to DB.
+ * `mysql_host` -- MySQL server host name. Default: localhost.
 
 ### FTP options
 

@@ -23,7 +23,7 @@ archive_path="/var/buckup2/test_backup/"
 
 # list of mysql databases to be stored
 mysql_databases="test"
-
+mysql_host="server"
 mysql_user="buckup"
 mysql_passwd="buckup"
 
