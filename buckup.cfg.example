@@ -1,0 +1,40 @@
+# Example configuration file for buckup 0.2.x
+# (c) Mike Limansky, 2009.
+#
+
+######## Files archiving options #########
+
+# Base directory to files to be archived.
+# files_base_dir=/var/www/path/
+
+# The list of files (or folders) to be archived.
+# files_to_archive=testdata
+
+# The list of files to be excluded from archive.
+# files_to_exclude="testdata/exclude testdata/excludefile"
+
+# The base part of the backup file name.
+archive_name=buckup
+
+# Path to store archives localy.
+archive_path="/var/buckup2/test_backup/"
+
+######### MySql options ##########
+
+# list of mysql databases to be stored
+mysql_databases="test"
+
+mysql_user="buckup"
+mysql_passwd="buckup"
+
+########## FTP options ############
+
+# ftp_host=localhost
+# ftp_user=anonymous
+# ftp_passwd=a@a
+
+########## Cleanup options ###########
+
+# How many days backup shall be stored.
+local_life_time=30
+ftp_life_time=60
