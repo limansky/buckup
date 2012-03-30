@@ -113,8 +113,6 @@ then
 			echo -n "Performing incremental archiving..."
 			upname="$archive_path/$archive_name-$today-upd"
 			archive=$upname.$ARCH_EXT
-			# TODO: use find -regex
-			echo "find $archive_path -maxdepth 1 -regextype posix-extended -regex "$archive_path/$archive_name-[0-9]{8}-base.$LIST_EXT" | sort -r | head -1"
 			listfile=`find $archive_path -maxdepth 1 -regextype posix-extended -regex "$archive_path/$archive_name-[0-9]{8}-base.$LIST_EXT" | sort -r | head -1`
 			if [[ -z "$listfile" ]]
 			then
