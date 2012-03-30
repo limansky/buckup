@@ -75,6 +75,8 @@ then
 	exit 5
 fi
 
+archive_path=${archive_path%/}
+
 target_files=""
 today=`date +%Y%m%d`
 
@@ -112,7 +114,8 @@ then
 			upname="$archive_path/$archive_name-$today-upd"
 			archive=$upname.$ARCH_EXT
 			# TODO: use find -regex
-			listfile=`find $archive_path -name "$archive_name*.$LIST_EXT" | grep "$archive_name-[0-9]\{8\}" | tail -1`
+			echo "find $archive_path -maxdepth 1 -regextype posix-extended -regex "$archive_path/$archive_name-[0-9]{8}-base.$LIST_EXT" | sort -r | head -1"
+			listfile=`find $archive_path -maxdepth 1 -regextype posix-extended -regex "$archive_path/$archive_name-[0-9]{8}-base.$LIST_EXT" | sort -r | head -1`
 			if [[ -z "$listfile" ]]
 			then
 				errorlog "Listing file not found! Cannot do incremental backup!"
@@ -127,7 +130,7 @@ then
 
 	if [[ -f $archive ]]
 	then
-		errorlog "Archive already exists! Something wrong is occurred!"
+		errorlog "Archive already exists! Something wrong has been occurred!"
 		exit 10
 	fi
 	
@@ -194,7 +197,7 @@ fi
 if [[ -n $local_life_time && $2 = "base" ]]
 then
 	echo -n "Cleaning the buckup directory..."
-	find $archive_path -name "$archive_name-[0-9]*" -mtime +$local_life_time -print -delete
+	find $archive_path -maxdepth 1 -name "$archive_name-[0-9]*" -mtime +$local_life_time -print -delete
 	echo " Done"
 fi 
 
