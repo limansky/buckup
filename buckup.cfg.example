@@ -1,4 +1,4 @@
-# Example configuration file for buckup 0.2.x
+# Example configuration file for buckup 0.4.x
 # (c) Mike Limansky, 2009.
 #
 
@@ -26,6 +26,13 @@ mysql_databases="test"
 mysql_host="server"
 mysql_user="buckup"
 mysql_passwd="buckup"
+
+########## MongoDB options ###########
+
+mongo_databases="test"
+mongo_host="server"
+mongo_user="buckup"
+mongo_passwd="buckup"
 
 ########## FTP options ############
 

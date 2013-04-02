@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Buckup version 0.3.1
+# Buckup version 0.4.0
 # Copyright (C) 2009-2012 Mike Limansky
 #
 # This program is free software; you can redistribute it and/or modify
@@ -145,10 +145,10 @@ then
 	target_files="$archive $listfile"
 fi
 
-# Dump databases
+# Dump MySQL databases
 if [[ -n $mysql_databases ]]
 then
-	echo -n "Creating DB dump..."
+	echo -n "Creating MySQL dump..."
 	dumpname="$archive_path/$archive_name-$today.$DUMP_EXT"
 
 	if mysqldump -u$mysql_user -p$mysql_passwd -h$mysql_host --databases $mysql_databases > $dumpname
@@ -160,8 +160,47 @@ then
 		target_files+=" $dumpname.gz"
 	else
 		echo " Failed"
-		errorlog "Unable to dump DB"
+		errorlog "Unable to dump MySQL databases"
 	fi
+fi
+
+# Dump MongoDB databases
+if [[ -n $mongo_databases ]]
+then
+    echo -n "Creating MongoDB dump..."
+    pushd $archive_path > /dev/null
+    dumpname="$archive_name-mongo-$today.$ARCH_EXT"
+
+    mongoargs=""
+    if [[ -n $mongo_host ]]
+    then
+        mongoargs+="--host $mongo_host"
+    fi
+
+    if [[ -n $mongo_user ]]
+    then
+        mongoargs+=" -u $mongo_user"
+    fi
+
+    if [[ -n $mongo_passwd ]]
+    then
+        mongoargs+=" -p $mongo_passwd"
+    fi
+
+    if mongodump $mongoargs -d $mongo_databases > /dev/null
+    then
+        echo " Done"
+        echo -n "Archiving dump..."
+        tar czf $dumpname dump
+        echo " Done"
+        target_files+=" $dumpname"
+        rm -r dump
+    else
+        echo " Failed"
+        errorlog "Unable to dump MongoDB databases"
+    fi
+
+    popd > /dev/null
 fi
 
 # Upload on FTP
