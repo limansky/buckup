@@ -1,8 +1,8 @@
 Buckup 2
 ========
 
-  Buckup is a simple bash script to perform full or incremental file backups (using 
-tar), and MySQL DB backups.
+  Buckup is a simple bash script to perform full or incremental file backups (using
+tar), and MySQL and MongoDB databases backups.
 
 Requirements
 ------------
@@ -12,6 +12,7 @@ Following commands shall be available to perform backup properly:
  * `gzip` -- currently only gz archives a supported.
  * `tar` -- for files archiving.
  * `mysqlbackup` -- if you need to backup MySQL database.
+ * `mongodump` -- if you going to backup MongoDB database.
  * `ftp` -- if you need to upload backup to FTP server
 
 Usage
@@ -40,13 +41,21 @@ Config file format
  * `files_to_archive` -- list of files and directories to be archived (e.g. "htdocs cgi-bin").
  * `files_to_exclude` -- list of files to be excluded from backup (e.g. "htdocs/tmp").
 
-### Database backup options:
+### MySQL backup options:
 
- * `mysql_databases` -- list of databases to be included in backup. If not defined, DB backup is 
+ * `mysql_databases` -- list of databases to be included in backup. If not defined, MySQL backup is
                         not performed.
  * `mysql_user` -- user name to connect to DB (this user shall have read access to the DB).
  * `mysql_passwd` -- user password to connect to DB.
  * `mysql_host` -- MySQL server host name. Default: localhost.
+
+### MongoDB backup options:
+
+ * `mongo_databases` -- list of databases to be included in backup. If not defined, MongoDB backup will
+                        not be performed.
+ * `mongo_host` -- MongoDB server host name. Default: localhost.
+ * `mongo_user` -- user name to connect to the database.
+ * `mongo_passwd` -- password to connect to the database.
 
 ### FTP options
 
