@@ -169,7 +169,7 @@ if [[ -n $mongo_databases ]]
 then
     echo -n "Creating MongoDB dump..."
     pushd $archive_path > /dev/null
-    dumpname="$archive_name-mongo-$today.$ARCH_EXT"
+    dumpname="$archive_name-$today-mongodump.$ARCH_EXT"
 
     mongoargs=""
     if [[ -n $mongo_host ]]
