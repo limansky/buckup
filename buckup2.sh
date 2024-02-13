@@ -71,7 +71,7 @@ source $1
 
 if [[ ! -d $archive_path ]]
 then
-	errorlog "Archive path isn't valid or not exists."
+	errorlog "Archive path '$archive_path' isn't valid or not exists."
 	exit 5
 fi
 
